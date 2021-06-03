@@ -29,7 +29,9 @@ public class ListingJdbcDAO implements DAO<Plant>{
 				"id, title, description, inventory_item_location_id," + 
 				" listing_price, currency, quantity, listing_status," + 
 				" marketplace, upload_time, owner_email_address) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(sql,plant);
+		jdbcTemplate.update(sql,plant.getId(), plant.getTitle(), plant.getDescription(),
+				plant.getInvertory_item_location(), plant.getListing_price(), plant.getCurrency(),
+				plant.getQuantity(), plant.getListing_status(), plant.getMarketplace(), plant.getUpload_time(),plant.getOwner_email_address());
 	}
 
 	@Override
