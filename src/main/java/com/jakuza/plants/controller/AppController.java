@@ -14,14 +14,16 @@ public class AppController {
 
      private final DataRetriver dataRetriver;
 
-     AppController(DataRetriver dataRetriver){
+     public AppController(DataRetriver dataRetriver){
          this.dataRetriver = dataRetriver;
      }
 
     @PostConstruct
     public void appController(){
         Plant[] plants = dataRetriver.getDataFromAPI();
-        Arrays.stream(plants).forEach(System.out::println);
+        Arrays.stream(plants).forEach((plant) -> {
+            System.out.println(plant);
+        });
     }
     
 }

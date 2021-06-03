@@ -5,27 +5,24 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@ToString(includeFieldNames = false)
 public class Plant {
 
-	UUID id;
-	String title;
-	String description;
-	UUID invertory_item_location;
-	double listing_price;
-	String currency;
-	int quantity;
-	int listing_status;
-	int marketplace;
-	String upload_time;
-	String owner_email_address;
+	private UUID id;
+	private String title;
+	private String description;
+	private UUID invertory_item_location;
+	private double listing_price;
+	private String currency;
+	private int quantity;
+	private int listing_status;
+	private int marketplace;
+	private String upload_time;
+	private String owner_email_address;
 
-
-	@Override
-	public String toString() {
-			return title + ": " + description;
-	}
 }
