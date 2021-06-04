@@ -1,7 +1,5 @@
 package com.jakuza.plants.service;
 
-import com.jakuza.plants.model.Plant;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -15,9 +13,9 @@ public class DataRetriver {
         this.restTemplate = restTemplate;
     }
 
-    public Plant[] getDataFromAPI(){
+    public Object[] getDataFromAPI(String url){
         
-        ResponseEntity<Plant[]> response = restTemplate.getForEntity("https://my.api.mockaroo.com/listing?key=63304c70", Plant[].class);
+        ResponseEntity<Object[]> response = restTemplate.getForEntity(url, Object[].class);
         return response.getBody();
         
     }

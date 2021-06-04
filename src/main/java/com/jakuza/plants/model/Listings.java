@@ -11,12 +11,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString(includeFieldNames = false)
-public class Plant {
+public class Listings {
 
 	private UUID id;
 	private String title;
 	private String description;
-	private UUID invertory_item_location;
+	private UUID location_id;
 	private double listing_price;
 	private String currency;
 	private int quantity;
