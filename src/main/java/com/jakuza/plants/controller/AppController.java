@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jakuza.plants.model.Listings;
+import com.jakuza.plants.model.Location;
 import com.jakuza.plants.service.DataRetriver;
 
 import org.springframework.stereotype.Component;
@@ -25,7 +26,13 @@ public class AppController {
     public void appController(){
         ObjectMapper mapper = new ObjectMapper();
 
-        Object[] objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/listing?key=63304c70");
+        Object[] objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/location?key=63304c70");
+        
+        Arrays.stream(objects)
+                .map(object -> mapper.convertValue(object, Location.class))
+                .forEach(System.out::println);
+
+        objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/listing?key=63304c70");
 
         Arrays.stream(objects)
                 .map(object -> mapper.convertValue(object, Listings.class))
