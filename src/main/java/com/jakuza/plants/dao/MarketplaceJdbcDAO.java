@@ -7,7 +7,9 @@ import java.util.UUID;
 import com.jakuza.plants.model.Marketplace;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MarketplaceJdbcDAO implements DAO<Marketplace>{
 
 	private final JdbcTemplate jdbcTemplate;
