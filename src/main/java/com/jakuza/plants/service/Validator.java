@@ -33,10 +33,14 @@ public class Validator {
             return false;
         }
 
-        if(item.getTitle() == null || item.getTitle().equals("")) return false;
+        if(item.getTitle() == null || item.getTitle().equals("")){
+            return false;
+        }
 
         Optional<Location> loc = locationDao.get(UUID.fromString(item.getLocation_id()));
-        if(!loc.isPresent()) return false;
+        if(loc.isEmpty()){ 
+            return false; 
+        }
         return true;
     }
     
