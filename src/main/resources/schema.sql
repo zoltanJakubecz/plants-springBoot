@@ -31,7 +31,7 @@ CREATE TABLE marketplace (
 CREATE TABLE listing (
   id uuid PRIMARY KEY,
   title VARCHAR(100),
-  description VARCHAR(100),
+  description VARCHAR(255),
   inventory_item_location_id uuid REFERENCES location(id),
   listing_price FLOAT,
   currency VARCHAR(3),
