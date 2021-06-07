@@ -2,7 +2,6 @@ package com.jakuza.plants.dao;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.jakuza.plants.model.ListingStatus;
 
