@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class LocationJdbcDAO implements DAO<Location> {
+public class LocationJdbcDAO {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -34,12 +34,10 @@ public class LocationJdbcDAO implements DAO<Location> {
 
     };
 
-    @Override
     public List<Location> list() {
         return null;
     }
 
-    @Override
     public void create(Location location) {
 
         String sql = "INSERT INTO location(id, manager_name, phone, address_primary, address_secondary, country, town, postal_code) VALUES (?,?,?,?,?,?,?,?)"; 
@@ -54,16 +52,17 @@ public class LocationJdbcDAO implements DAO<Location> {
 
     }
 
-    @Override
-    public Optional<Location> get(UUID id) {
 
+    public Optional<Location> get(String id) {
+        
+        UUID uuid = UUID.fromString(id);
         String sql = "SELECT * from location WHERE id = ?";
         Location location = null;
 
         try {
-            location = jdbcTemplate.queryForObject(sql, rowMapper , new Object[]{id});
+            location = jdbcTemplate.queryForObject(sql, rowMapper , new Object[]{uuid});
         } catch (Exception e) {
-            System.out.println("Location not found : " + id);
+            System.out.println("Location not found : " + uuid);
         }
 
         return Optional.ofNullable(location);

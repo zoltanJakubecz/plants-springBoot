@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.jakuza.plants.model.ListingStatus;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,14 @@ import lombok.RequiredArgsConstructor;
 public class ListingStatusJdbcDAO implements DAO<ListingStatus> {
 
 	private final JdbcTemplate jdbcTemplate;
+
+	RowMapper<ListingStatus> rowMapper = (rs, rowNum) -> {
+		ListingStatus status = new ListingStatus();
+		status.setId(rs.getInt("id"));
+		status.setStatus_name(rs.getString("status_name"));
+		return status;
+	};
+
 
 	@Override
 	public List<ListingStatus> list() {
@@ -28,11 +37,21 @@ public class ListingStatusJdbcDAO implements DAO<ListingStatus> {
 	jdbcTemplate.update(sql, listingStatus.getId(), listingStatus.getStatus_name());
 	}
 
-	@Override
-	public Optional<ListingStatus> get(UUID id) {
-		return null;
-	}
 
+	public Optional<ListingStatus> get(int id) {
+
+		String sql = "SELECT * from status WHERE id = ?";
+		ListingStatus status = null;
+
+		try {
+			status = jdbcTemplate.queryForObject(sql , rowMapper, new Object[]{id});
+		} catch (Exception e) {
+			System.out.println("Status not found: " + id);
+		}
+
+		return Optional.ofNullable(status);
+
+	}
 
 
 }
