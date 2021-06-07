@@ -2,7 +2,6 @@ package com.jakuza.plants.dao;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.jakuza.plants.model.Listings;
 
@@ -34,8 +33,8 @@ public class ListingJdbcDAO implements DAO<Listings>{
 				listings.getQuantity(), listings.getListing_status(), listings.getMarketplace(), listings.getUpload_time(), listings.getOwner_email_address());
 	}
 
-	@Override
-	public Optional<Listings> get(UUID id){
+
+	public Optional<Listings> get(String id){
 		return null;
 	}
 }

@@ -5,7 +5,10 @@ import java.util.Arrays;
 import javax.annotation.PostConstruct;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jakuza.plants.dao.DAO;
+import com.jakuza.plants.dao.ListingJdbcDAO;
+import com.jakuza.plants.dao.ListingStatusJdbcDAO;
+import com.jakuza.plants.dao.LocationJdbcDAO;
+import com.jakuza.plants.dao.MarketplaceJdbcDAO;
 import com.jakuza.plants.model.ListingStatus;
 import com.jakuza.plants.model.Listings;
 import com.jakuza.plants.model.Location;
@@ -22,10 +25,10 @@ import lombok.RequiredArgsConstructor;
 public class AppController {
 
      private final DataRetriver dataRetriver;
-     private final DAO<Listings> listingDAO;
-     private final DAO<Location> locationDAO;
-     private final DAO<Marketplace> marketDAO;
-     private final DAO<ListingStatus> statusDAO;
+     private final ListingJdbcDAO listingDAO;
+     private final LocationJdbcDAO locationDAO;
+     private final MarketplaceJdbcDAO marketDAO;
+     private final ListingStatusJdbcDAO statusDAO;
      private final Validator validator;
 
 
@@ -59,8 +62,8 @@ public class AppController {
         Arrays.stream(objects)
                 .filter(object -> validator.isValid(object))
                 .map(object -> mapper.convertValue(object, Listings.class))
-                .forEach(System.out::println);
-//                    .forEach(listingDAO::create);
+//                .forEach(System.out::println);
+                .forEach(listingDAO::create);
                
     }
     

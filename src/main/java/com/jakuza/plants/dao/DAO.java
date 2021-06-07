@@ -2,7 +2,6 @@ package com.jakuza.plants.dao;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface DAO<T>{
 	
@@ -10,7 +9,8 @@ public interface DAO<T>{
 
 	void create(T t);
 
-	Optional<T> get(UUID id);
+//	Optional<T> get(String id);
+
 
 
 }
