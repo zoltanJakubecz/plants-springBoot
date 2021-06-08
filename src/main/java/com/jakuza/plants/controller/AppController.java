@@ -64,7 +64,8 @@ public class AppController {
                 .map(object -> mapper.convertValue(object, Listings.class))
 //                .forEach(System.out::println);
                 .forEach(listingDAO::create);
-               
+
+       validator.getFailedLines().stream().forEach(item -> System.out.println(item[0]));        
     }
     
 }

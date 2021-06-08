@@ -1,6 +1,8 @@
 package com.jakuza.plants.service;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -26,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Validator {
 
+    private static List<String[]> failedLines = new ArrayList<>();
     private final LocationJdbcDAO locationDao; 
     private final ListingStatusJdbcDAO statusDAO;
     private final MarketplaceJdbcDAO marketDAO;
@@ -78,10 +81,15 @@ public class Validator {
         Matcher matcher = pattern.matcher(item.getOwner_email_address());
         if(!matcher.matches()) {
             System.out.println("Wrong EMAIL");
+            failedLines.add(new String[]{item.getId(),String.valueOf(item.getMarketplace()), "email"});
             return false;
         }
 
         return true;
+    }
+
+    public List<String[]> getFailedLines(){
+        return failedLines;
     }
     
 }
