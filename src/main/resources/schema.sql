@@ -38,7 +38,7 @@ CREATE TABLE listing (
   quantity INTEGER,
   listing_status INTEGER REFERENCES status(id),
   marketplace INTEGER REFERENCES marketplace(id),
-  upload_time VARCHAR(20),
+  upload_time TIMESTAMP,
   owner_email_address VARCHAR(255)
 );
 

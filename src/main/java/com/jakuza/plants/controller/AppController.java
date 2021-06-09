@@ -14,6 +14,7 @@ import com.jakuza.plants.model.ListingStatus;
 import com.jakuza.plants.model.Listings;
 import com.jakuza.plants.model.Location;
 import com.jakuza.plants.model.Marketplace;
+import com.jakuza.plants.model.dto.ListingsDTO;
 import com.jakuza.plants.service.DataRetriver;
 import com.jakuza.plants.service.InvalidLineStore;
 import com.jakuza.plants.service.Validator;
@@ -62,7 +63,9 @@ public class AppController {
         objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/listing?key=63304c70");
         Arrays.stream(objects)
                 .filter(object -> validator.isValid(object))
-                .map(object -> mapper.convertValue(object, Listings.class))
+                .map(object -> mapper.convertValue(object, ListingsDTO.class))
+                .map(item -> Listings.fromDTO(item))
+//                .forEach(System.out::println);
                 .forEach(listingDAO::create);
 
         csvWriter.saveToFile(invalidLines.getInvalidLines());

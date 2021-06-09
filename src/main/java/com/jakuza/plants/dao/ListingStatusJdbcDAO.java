@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class ListingStatusJdbcDAO implements DAO<ListingStatus> {
+public class ListingStatusJdbcDAO{
 
 	private final JdbcTemplate jdbcTemplate;
 
@@ -25,12 +25,7 @@ public class ListingStatusJdbcDAO implements DAO<ListingStatus> {
 	};
 
 
-	@Override
-	public List<ListingStatus> list() {
-		return null;
-	}
 
-	@Override
 	public void create(ListingStatus listingStatus) {
 	String sql =	"INSERT INTO status(id, status_name) VALUES (?,?)";
 	jdbcTemplate.update(sql, listingStatus.getId(), listingStatus.getStatus_name());

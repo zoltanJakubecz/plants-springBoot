@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MarketplaceJdbcDAO implements DAO<Marketplace>{
+public class MarketplaceJdbcDAO{
 
 	private final JdbcTemplate jdbcTemplate;
 
@@ -25,12 +25,7 @@ public class MarketplaceJdbcDAO implements DAO<Marketplace>{
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	@Override
-	public List<Marketplace> list(){
-		return null;
-	}
 
-	@Override
 	public void create(Marketplace marketplace){
 		String sql = "INSERT INTO marketplace(id, marketplace_name) VALUES (?,?)";
 		jdbcTemplate.update(sql, marketplace.getId(), marketplace.getMarketplace_name());

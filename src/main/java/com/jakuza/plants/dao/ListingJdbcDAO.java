@@ -12,17 +12,12 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class ListingJdbcDAO implements DAO<Listings>{
+public class ListingJdbcDAO{
 
 	private final JdbcTemplate jdbcTemplate;
 
 
-	@Override
-	public List<Listings> list(){
-		return null;
-	};
 
-	@Override
 	public void create(Listings listings){
 		String sql = "INSERT INTO listing(" + 
 				"id, title, description, inventory_item_location_id," +
@@ -34,7 +29,4 @@ public class ListingJdbcDAO implements DAO<Listings>{
 	}
 
 
-	public Optional<Listings> get(String id){
-		return null;
-	}
 }
