@@ -14,6 +14,7 @@ import com.jakuza.plants.model.Listings;
 import com.jakuza.plants.model.Location;
 import com.jakuza.plants.model.Marketplace;
 import com.jakuza.plants.service.DataRetriver;
+import com.jakuza.plants.service.InvalidLineStore;
 import com.jakuza.plants.service.Validator;
 
 import org.springframework.stereotype.Component;
@@ -30,6 +31,7 @@ public class AppController {
      private final MarketplaceJdbcDAO marketDAO;
      private final ListingStatusJdbcDAO statusDAO;
      private final Validator validator;
+     private final InvalidLineStore invalidLines;
 
 
     @PostConstruct
@@ -65,7 +67,7 @@ public class AppController {
 //                .forEach(System.out::println);
                 .forEach(listingDAO::create);
 
-       validator.getFailedLines().stream().forEach(item -> System.out.println(item[0]));        
+        invalidLines.getInvalidLines().stream().forEach(item -> System.out.println(item[0])); 
     }
     
 }

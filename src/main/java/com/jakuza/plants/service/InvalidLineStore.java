@@ -31,9 +31,9 @@ public class InvalidLineStore {
     }
 
 
-    public void addInvalidLines(ListingsDTO item){
+    public void addInvalidLines(ListingsDTO item, String invalidField){
             Optional<Marketplace> mkt = marketDAO.get(item.getMarketplace()); 
-            invalidLines.add(new String[]{item.getId(),mkt.get().getMarketplace_name(), "email"});
+            invalidLines.add(new String[]{item.getId(),mkt.get().getMarketplace_name(), invalidField});
             
     }
 
