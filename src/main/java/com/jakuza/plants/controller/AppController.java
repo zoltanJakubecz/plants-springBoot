@@ -5,6 +5,7 @@ import java.util.Arrays;
 import javax.annotation.PostConstruct;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jakuza.plants.dao.CsvWriter;
 import com.jakuza.plants.dao.ListingJdbcDAO;
 import com.jakuza.plants.dao.ListingStatusJdbcDAO;
 import com.jakuza.plants.dao.LocationJdbcDAO;
@@ -32,6 +33,7 @@ public class AppController {
      private final ListingStatusJdbcDAO statusDAO;
      private final Validator validator;
      private final InvalidLineStore invalidLines;
+     private final CsvWriter csvWriter;
 
 
     @PostConstruct
@@ -42,21 +44,18 @@ public class AppController {
         Object[] objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/location?key=63304c70");
         Arrays.stream(objects)
                 .map(object -> mapper.convertValue(object, Location.class))
-//                .forEach(System.out::println);
                 .forEach(locationDAO::create);
 
 
         objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/listingStatus?key=63304c70");
         Arrays.stream(objects)
                 .map(object -> mapper.convertValue(object, ListingStatus.class))
-//                .forEach(System.out::println);
                 .forEach(statusDAO::create);
 
 
         objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/marketplace?key=63304c70");
         Arrays.stream(objects)
                 .map(object -> mapper.convertValue(object, Marketplace.class))
-//                .forEach(System.out::println);
                 .forEach(marketDAO::create);
 
 
@@ -64,10 +63,9 @@ public class AppController {
         Arrays.stream(objects)
                 .filter(object -> validator.isValid(object))
                 .map(object -> mapper.convertValue(object, Listings.class))
-//                .forEach(System.out::println);
                 .forEach(listingDAO::create);
 
-        invalidLines.getInvalidLines().stream().forEach(item -> System.out.println(item[0])); 
+        csvWriter.saveToFile(invalidLines.getInvalidLines());
     }
     
 }

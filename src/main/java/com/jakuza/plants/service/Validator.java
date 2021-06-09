@@ -39,38 +39,46 @@ public class Validator {
         try {
             UUID.fromString(item.getId());
         } catch (Exception e) {
+            invalidLineStore.addInvalidLines(item, "id");
             return false;
         }
 
         if(item.getTitle() == null || item.getTitle().equals("")){
+            invalidLineStore.addInvalidLines(item, "title");
             return false;
         }
 
         Optional<Location> loc = locationDao.get(item.getLocation_id());
         if(loc.isEmpty()){ 
+            invalidLineStore.addInvalidLines(item, "location id");
             return false; 
         }
 
         Optional<ListingStatus> lst = statusDAO.get(item.getListing_status());
         if(lst.isEmpty()){
+            invalidLineStore.addInvalidLines(item, "listing status id");
             return false;
         }
 
         Optional<Marketplace> mkt = marketDAO.get(item.getMarketplace());
         if(mkt.isEmpty()){
+            invalidLineStore.addInvalidLines(item, "marketplace id");
             return false;
         }
 
         if(item.getListing_price() <= 0 || 
                 Double.toString(item.getListing_price()).split("\\.")[1].length() != 2){
+            invalidLineStore.addInvalidLines(item, "price");
             return false;
         }
 
         if (item.getCurrency().length() != 3) {
+            invalidLineStore.addInvalidLines(item, "currency");
             return false;
         }
 
         if (item.getQuantity() <= 0){
+            invalidLineStore.addInvalidLines(item, "quantity");
             return false;
         }
         
