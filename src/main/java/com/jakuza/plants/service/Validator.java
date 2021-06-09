@@ -6,7 +6,6 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jakuza.plants.dao.ListingStatusJdbcDAO;
 import com.jakuza.plants.dao.LocationJdbcDAO;
 import com.jakuza.plants.dao.MarketplaceJdbcDAO;
@@ -32,9 +31,6 @@ public class Validator {
     private final MarketplaceJdbcDAO marketDAO;
 
     public boolean isValid(ListingsDTO item){
-
- //       ObjectMapper mapper = new ObjectMapper();
-//        ListingsDTO item = mapper.convertValue(object, ListingsDTO.class);
 
         try {
             UUID.fromString(item.getId());
@@ -67,7 +63,7 @@ public class Validator {
         }
 
         if(item.getListing_price() <= 0 || 
-                Double.toString(item.getListing_price()).split("\\.")[1].length() != 2){
+            Double.toString(item.getListing_price()).split("\\.")[1].length() != 2){
             invalidLineStore.addInvalidLines(item, "price");
             return false;
         }
