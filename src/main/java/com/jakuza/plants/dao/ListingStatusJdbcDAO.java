@@ -1,6 +1,5 @@
 package com.jakuza.plants.dao;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.jakuza.plants.model.ListingStatus;

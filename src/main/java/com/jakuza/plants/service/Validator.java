@@ -31,10 +31,10 @@ public class Validator {
     private final ListingStatusJdbcDAO statusDAO;
     private final MarketplaceJdbcDAO marketDAO;
 
-    public boolean isValid(Object object){
+    public boolean isValid(ListingsDTO item){
 
-        ObjectMapper mapper = new ObjectMapper();
-        ListingsDTO item = mapper.convertValue(object, ListingsDTO.class);
+ //       ObjectMapper mapper = new ObjectMapper();
+//        ListingsDTO item = mapper.convertValue(object, ListingsDTO.class);
 
         try {
             UUID.fromString(item.getId());

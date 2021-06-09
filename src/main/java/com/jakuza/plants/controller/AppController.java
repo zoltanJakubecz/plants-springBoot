@@ -62,8 +62,9 @@ public class AppController {
 
         objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/listing?key=63304c70");
         Arrays.stream(objects)
-                .filter(object -> validator.isValid(object))
+//                .filter(object -> validator.isValid(object))
                 .map(object -> mapper.convertValue(object, ListingsDTO.class))
+                .filter(listingDTO -> validator.isValid(listingDTO))
                 .map(item -> Listings.fromDTO(item))
 //                .forEach(System.out::println);
                 .forEach(listingDAO::create);
