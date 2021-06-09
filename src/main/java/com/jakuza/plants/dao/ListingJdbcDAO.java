@@ -1,13 +1,8 @@
 package com.jakuza.plants.dao;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.jakuza.plants.model.Listings;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
 import lombok.RequiredArgsConstructor;
 
 @Component

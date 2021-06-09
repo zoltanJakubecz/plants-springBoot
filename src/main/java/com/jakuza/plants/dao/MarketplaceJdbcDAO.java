@@ -1,10 +1,7 @@
 package com.jakuza.plants.dao;
 
-import java.util.List;
 import java.util.Optional;
-
 import com.jakuza.plants.model.Marketplace;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
