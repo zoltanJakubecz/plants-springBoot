@@ -1,6 +1,7 @@
 package com.jakuza.plants.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -15,8 +16,10 @@ import com.jakuza.plants.model.Listings;
 import com.jakuza.plants.model.Location;
 import com.jakuza.plants.model.Marketplace;
 import com.jakuza.plants.model.dto.ListingsDTO;
+import com.jakuza.plants.model.dto.ReportFullDTO;
 import com.jakuza.plants.service.DataRetriver;
 import com.jakuza.plants.service.InvalidLineStore;
+import com.jakuza.plants.service.Report;
 import com.jakuza.plants.service.Validator;
 
 import org.springframework.stereotype.Component;
@@ -35,6 +38,7 @@ public class AppController {
      private final Validator validator;
      private final InvalidLineStore invalidLines;
      private final CsvWriter csvWriter;
+     private final Report report;
 
 
     @PostConstruct
@@ -62,14 +66,18 @@ public class AppController {
 
         objects = dataRetriver.getDataFromAPI("https://my.api.mockaroo.com/listing?key=63304c70");
         Arrays.stream(objects)
-//                .filter(object -> validator.isValid(object))
                 .map(object -> mapper.convertValue(object, ListingsDTO.class))
                 .filter(listingDTO -> validator.isValid(listingDTO))
                 .map(item -> Listings.fromDTO(item))
-//                .forEach(System.out::println);
                 .forEach(listingDAO::create);
 
         csvWriter.saveToFile(invalidLines.getInvalidLines());
+
+
+        List<ReportFullDTO> reportList = listingDAO.getReport();
+        report.createReport(reportList);
     }
+
+
     
 }
