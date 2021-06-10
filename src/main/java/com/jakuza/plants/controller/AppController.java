@@ -18,9 +18,10 @@ import com.jakuza.plants.model.Location;
 import com.jakuza.plants.model.Marketplace;
 import com.jakuza.plants.model.dto.ListingsDTO;
 import com.jakuza.plants.model.dto.ReportFullDTO;
+import com.jakuza.plants.model.dto.ReportMonthlyDTO;
 import com.jakuza.plants.service.DataRetriver;
 import com.jakuza.plants.service.InvalidLineStore;
-import com.jakuza.plants.service.Report;
+import com.jakuza.plants.service.ReportService;
 import com.jakuza.plants.service.Validator;
 
 import org.springframework.stereotype.Component;
@@ -40,7 +41,7 @@ public class AppController {
      private final Validator validator;
      private final InvalidLineStore invalidLines;
      private final CsvWriter csvWriter;
-     private final Report report;
+     private final ReportService reportService;
 
 
     @PostConstruct
@@ -77,7 +78,10 @@ public class AppController {
 
 
         List<ReportFullDTO> reportList = reportDAO.getReport();
-        report.createReport(reportList);
+
+        List<ReportMonthlyDTO> reportMonthlyList = reportDAO.getReportMonthly();
+//        reportMonthlyList.forEach(item -> System.out.println("Helly: " + item.getMonth()));
+        reportService.createReport(reportList, reportMonthlyList);
     }
 
 

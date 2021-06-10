@@ -1,6 +1,5 @@
 package com.jakuza.plants.model.dto;
 
-import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +13,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class ReportMonthlyDTO {
 
-	private LocalDate month;
+	private String month;
   private String name;
+	private int count;
 	private double mTotalPrice;
 
 	
