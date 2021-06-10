@@ -11,6 +11,7 @@ import com.jakuza.plants.dao.ListingJdbcDAO;
 import com.jakuza.plants.dao.ListingStatusJdbcDAO;
 import com.jakuza.plants.dao.LocationJdbcDAO;
 import com.jakuza.plants.dao.MarketplaceJdbcDAO;
+import com.jakuza.plants.dao.ReportJdbcDAO;
 import com.jakuza.plants.model.ListingStatus;
 import com.jakuza.plants.model.Listings;
 import com.jakuza.plants.model.Location;
@@ -35,6 +36,7 @@ public class AppController {
      private final LocationJdbcDAO locationDAO;
      private final MarketplaceJdbcDAO marketDAO;
      private final ListingStatusJdbcDAO statusDAO;
+     private final ReportJdbcDAO reportDAO;
      private final Validator validator;
      private final InvalidLineStore invalidLines;
      private final CsvWriter csvWriter;
@@ -74,7 +76,7 @@ public class AppController {
         csvWriter.saveToFile(invalidLines.getInvalidLines());
 
 
-        List<ReportFullDTO> reportList = listingDAO.getReport();
+        List<ReportFullDTO> reportList = reportDAO.getReport();
         report.createReport(reportList);
     }
 
