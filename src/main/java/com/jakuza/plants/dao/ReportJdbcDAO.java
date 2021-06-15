@@ -15,7 +15,8 @@ import lombok.RequiredArgsConstructor;
 public class ReportJdbcDAO {
 
 	private final JdbcTemplate jdbcTemplate;
-	
+
+	/*
 	public List<ReportFullDTO> getReport() {
 
 		String sql = "SELECT marketplace_name, COUNT(listing.id), ROUND(SUM(listing_price)::numeric, 2) as  sum_price from listing JOIN marketplace ON listing.marketplace = marketplace.id GROUP BY marketplace_name;";
@@ -28,7 +29,7 @@ public class ReportJdbcDAO {
 				return report;
 		});
 	}
-
+*/
 	public List<ReportMonthlyDTO> getReportMonthly() {
 
 		String sql = "SELECT date_trunc('month', listing.upload_time) as month, " 

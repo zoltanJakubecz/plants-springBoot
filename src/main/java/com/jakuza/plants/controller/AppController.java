@@ -77,11 +77,10 @@ public class AppController {
         csvWriter.saveToFile(invalidLines.getInvalidLines());
 
 
-        List<ReportFullDTO> reportList = reportDAO.getReport();
+//        List<ReportFullDTO> reportList = reportDAO.getReport();
 
         List<ReportMonthlyDTO> reportMonthlyList = reportDAO.getReportMonthly();
-//        reportMonthlyList.forEach(item -> System.out.println("Helly: " + item.getMonth()));
-        reportService.createReport(reportList, reportMonthlyList);
+        reportService.createReport(reportMonthlyList);
     }
 
 
